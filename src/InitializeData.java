@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // This class will read a text file that contains student information.
 // It will read and seperate each line into objects.
@@ -20,6 +21,7 @@ public class InitializeData {
             String[] stringData = line.split(" ");
             seperateIntoObjects(stringData);
         }
+        br.close();
 
     }
 
@@ -36,6 +38,12 @@ public class InitializeData {
 
         Student student = new Student(studentId, name, age, gpa);
         students.add(student);
+    }
+
+    public static void printList() {
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println(students.get(i) + " ");
+        }
     }
 
 }

@@ -9,17 +9,17 @@ public class BinaryInsertion {
    // ________
    // we have a value of x, and each time we split
    //
-   private static int binarySearch(ArrayList<Student> students, int id, int k)
+   private static int binarySearch(ArrayList<Student> students, int id, int n)
 
    {
       int beginPos = 0;
-      int endPos = k;
+      int endPos = n;
 
       while (beginPos < endPos) {
          // we split array
          int midpoint = (beginPos + endPos) / 2;
          // we then compare the midpoint value to whatever current value we have
-         boolean expression = students.get(midpoint).getStudentId() <= students.get(k).getStudentId();
+         boolean expression = students.get(midpoint).getStudentId() <= students.get(n).getStudentId();
 
          if (expression) {
             beginPos = midpoint + 1;
@@ -44,28 +44,52 @@ public class BinaryInsertion {
    }
 
    // sort the input arrays based on student id
-   private static void biInsertionSort(ArrayList<Student> students) {
-      int sortedLoc, k;
-      Student selectedStudentRecord;
+   public static void biInsertionSort(ArrayList<Student> students) {
 
-      // running a loop to put each item to its right position
+      for (int n = 1; n < students.size(); n++) {
+         int key = students.get(n).getStudentId();
 
-      for (int i = 1; i < students.size(); ++i) {
-         k = i - 1;
+         // after we find the index
+         int foundIndx = binarySearch(students, key, n);
 
-         // Select an item
-         selectedStudentRecord = students.get(k);
+         // we shift the values to the right
+         int adjIndx = n;
 
-         // finds the index to place th value
-         sortedLoc = binarySearch(students, selectedStudentRecord.getStudentId(), k);
-
-         // while loc is less than j shift array to the right
-         while (k >= sortedLoc) {
-            // students[k + 1] = students[k];
-            students.set(k + 1, students.get(k));
+         while (adjIndx > foundIndx) {
+            // left values will go right
+            students.set(adjIndx, students.get(adjIndx - 1));
+            adjIndx--;
          }
-         // put selected to its right position
-         students.set(k + 1, selectedStudentRecord);
+         students.set(foundIndx, students.get(n));
+
       }
+      // int sortedLoc, k;
+      // // our key
+      // Student selectedStudentRecord;
+
+      // // running a loop to put each item to its right position
+
+      // for (int i = 1; i < students.size(); i++) {
+
+      // // We store a refernece of the value
+      // selectedStudentRecord = students.get(i);
+
+      // System.out.println(selectedStudentRecord.getStudentId());
+      // // finds the index to place th value
+      // sortedLoc = binarySearch(students, selectedStudentRecord.getStudentId(), i);
+      // k = i;
+
+      // // while loc is less than j shift array to the right
+      // while (k > sortedLoc) {
+      // // students[k + 1] = students[k];
+      // students.set(k, students.get(k - 1));
+      // k--;
+      // }
+      // // put selected to its right position
+      // students.set(sortedLoc, selectedStudentRecord);
+      // }
+      // System.out.println("finished main logic");
+
    }
+
 }

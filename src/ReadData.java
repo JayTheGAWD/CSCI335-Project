@@ -11,7 +11,7 @@ public class ReadData {
     // first you take in the input which is the file. the file contains all the
 
     public static void readFile() throws IOException {
-        File unsortedRecords = new File("C:\\Users\\Justin\\CSCI335-Project\\unsortedinput.txt");
+        File unsortedRecords = new File("unsortedinput.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(unsortedRecords));
         String line;

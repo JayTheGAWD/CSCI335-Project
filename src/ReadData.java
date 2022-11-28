@@ -1,11 +1,10 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 // This class will read a text file that contains student information.
 // It will read and seperate each line into objects.
 
-public class InitializeData {
+public class ReadData {
 
     static ArrayList<Student> students = new ArrayList<Student>();
 

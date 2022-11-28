@@ -1,7 +1,7 @@
 public class Student {
     private final int studentId, age;
-    private final double gpa;
     private final String name;
+    private final double gpa;
 
     Student(int studentId, String name, int age, double gpa) {
         this.studentId = studentId;
@@ -12,6 +12,18 @@ public class Student {
 
     public int getStudentId() {
         return studentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getGpa() {
+        return gpa;
     }
 
     @Override

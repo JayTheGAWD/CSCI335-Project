@@ -13,6 +13,7 @@ public class InitializeData {
 
     public static void readFile() throws IOException {
         File unsortedRecords = new File("C:\\Users\\Justin\\CSCI335-Project\\unsortedinput.txt");
+
         BufferedReader br = new BufferedReader(new FileReader(unsortedRecords));
         String line;
 

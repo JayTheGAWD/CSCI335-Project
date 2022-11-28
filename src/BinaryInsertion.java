@@ -9,86 +9,56 @@ public class BinaryInsertion {
    // ________
    // we have a value of x, and each time we split
    //
-   private static int binarySearch(ArrayList<Student> students, int id, int n)
-
-   {
+   private static int binarySearch(ArrayList<Student> students, Student key, int endPos) {
       int beginPos = 0;
-      int endPos = n;
 
-      while (beginPos < endPos) {
-         // we split array
-         int midpoint = (beginPos + endPos) / 2;
-         // we then compare the midpoint value to whatever current value we have
-         boolean expression = students.get(midpoint).getStudentId() <= students.get(n).getStudentId();
+      while (beginPos <= endPos) {
+         // we find the midpoint
+         int midpoint = beginPos + (endPos - beginPos) / 2;
 
-         if (expression) {
+         Student studentInQuestion = students.get(midpoint);
+
+         // if the key and studentInQuestion are the same then returns one position to
+         // the right of midpoint
+
+         if (key.getStudentId() == studentInQuestion.getStudentId())
+            return midpoint + 1;
+
+         // if not update parameters to continue splitting
+
+         if (key.getStudentId() > studentInQuestion.getStudentId()) {
             beginPos = midpoint + 1;
-
          } else {
-            endPos = midpoint;
+            endPos = midpoint - 1;
          }
+
       }
-
       return beginPos;
-
-      // if (high <= low)
-      // return (item > students.get(low).getStudentId()) ? (low + 1) : low;
-      // int mid = (low + high) / 2;
-      // if (item == students.get(mid).getStudentId())
-      // return mid + 1;
-      // if (item > students.get(mid).getStudentId())
-      // return binarySearch(students, item, mid + 1, high);
-      // else
-      // return binarySearch(students, item, low, mid - 1);
 
    }
 
-   // sort the input arrays based on student id
+   // This method sorts a list of students using insertion sort based on their ids
+   // using also a binary search. This is done in order to decrease the number
+   // of comparisions done through solely using insertion sort.
    public static void biInsertionSort(ArrayList<Student> students) {
 
       for (int n = 1; n < students.size(); n++) {
-         int key = students.get(n).getStudentId();
+         Student key = students.get(n);
+         int adjIndx = n - 1;
 
          // after we find the index
-         int foundIndx = binarySearch(students, key, n);
+         int foundIndx = binarySearch(students, key, adjIndx);
 
-         // we shift the values to the right
-         int adjIndx = n;
+         // we shift the left values to the right
+         while (adjIndx >= foundIndx) {
 
-         while (adjIndx > foundIndx) {
-            // left values will go right
-            students.set(adjIndx, students.get(adjIndx - 1));
+            students.set(adjIndx + 1, students.get(adjIndx));
             adjIndx--;
          }
-         students.set(foundIndx, students.get(n));
+         // we place the original value in the correct position
+         students.set(adjIndx + 1, key);
 
       }
-      // int sortedLoc, k;
-      // // our key
-      // Student selectedStudentRecord;
-
-      // // running a loop to put each item to its right position
-
-      // for (int i = 1; i < students.size(); i++) {
-
-      // // We store a refernece of the value
-      // selectedStudentRecord = students.get(i);
-
-      // System.out.println(selectedStudentRecord.getStudentId());
-      // // finds the index to place th value
-      // sortedLoc = binarySearch(students, selectedStudentRecord.getStudentId(), i);
-      // k = i;
-
-      // // while loc is less than j shift array to the right
-      // while (k > sortedLoc) {
-      // // students[k + 1] = students[k];
-      // students.set(k, students.get(k - 1));
-      // k--;
-      // }
-      // // put selected to its right position
-      // students.set(sortedLoc, selectedStudentRecord);
-      // }
-      // System.out.println("finished main logic");
 
    }
 
